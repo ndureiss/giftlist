@@ -59,6 +59,8 @@ export class List {
 	@OneToMany(() => Gift, (gift) => gift.list)
 	public gifts?: Gift[];
 
+	public hasBookedGifts?: boolean;
+
 	@CreateDateColumn()
 	createdDate!: Date;
 

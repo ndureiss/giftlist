@@ -52,7 +52,7 @@
 				"description": "Stringified email.\nSee [ISO Date String Regex](https://www.myintervals.com/blog/2009/05/20/iso-8601-date-validation-that-doesnt-suck/) and [RFC 3339](https://tools.ietf.org/html/rfc3339)",
 				"pattern": "([\\+-]?\\d{4}(?!\\d{2}\\b))((-?)((0[1-9]|1[0-2])(\\3([12]\\d|0[1-9]|3[01]))?|W([0-4]\\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\\d|[12]\\d{2}|3([0-5]\\d|6[1-6])))([T\\s]((([01]\\d|2[0-3])((:?)[0-5]\\d)?|24\\:?00)([\\.,]\\d+(?!:))?)?(\\17[0-5]\\d([\\.,]\\d+)?)?([zZ]|([\\+-])([01]\\d|2[0-3]):?([0-5]\\d)?)?)?)?"
 			},
-			"Pick_List.Exclude_keyofList.id-or-sharingCode-or-gifts-or-owners-or-grantedUsers-or-ownersDTO-or-grantedUsersDTO-or-createdDate-or-updatedDate__": {
+			"Pick_List.Exclude_keyofList.id-or-sharingCode-or-gifts-or-hasBookedGifts-or-owners-or-grantedUsers-or-ownersDTO-or-grantedUsersDTO-or-createdDate-or-updatedDate__": {
 				"properties": {
 					"title": {
 						"type": "string"
@@ -74,6 +74,9 @@
 						},
 						"type": "array"
 					},
+					"isOwner": {
+						"type": "boolean"
+					},
 					"isShared": {
 						"type": "boolean"
 					},
@@ -92,12 +95,12 @@
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
-			"Omit_List.id-or-sharingCode-or-gifts-or-owners-or-grantedUsers-or-ownersDTO-or-grantedUsersDTO-or-createdDate-or-updatedDate_": {
-				"$ref": "#/components/schemas/Pick_List.Exclude_keyofList.id-or-sharingCode-or-gifts-or-owners-or-grantedUsers-or-ownersDTO-or-grantedUsersDTO-or-createdDate-or-updatedDate__",
+			"Omit_List.id-or-sharingCode-or-gifts-or-hasBookedGifts-or-owners-or-grantedUsers-or-ownersDTO-or-grantedUsersDTO-or-createdDate-or-updatedDate_": {
+				"$ref": "#/components/schemas/Pick_List.Exclude_keyofList.id-or-sharingCode-or-gifts-or-hasBookedGifts-or-owners-or-grantedUsers-or-ownersDTO-or-grantedUsersDTO-or-createdDate-or-updatedDate__",
 				"description": "Construct a type with the properties of T except for those in type K."
 			},
 			"CreateListDTO": {
-				"$ref": "#/components/schemas/Omit_List.id-or-sharingCode-or-gifts-or-owners-or-grantedUsers-or-ownersDTO-or-grantedUsersDTO-or-createdDate-or-updatedDate_"
+				"$ref": "#/components/schemas/Omit_List.id-or-sharingCode-or-gifts-or-hasBookedGifts-or-owners-or-grantedUsers-or-ownersDTO-or-grantedUsersDTO-or-createdDate-or-updatedDate_"
 			},
 			"UnauthorizedErrorJSON": {
 				"properties": {
@@ -137,6 +140,9 @@
 						},
 						"type": "array"
 					},
+					"isOwner": {
+						"type": "boolean"
+					},
 					"isShared": {
 						"type": "boolean"
 					},
@@ -166,13 +172,16 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Pick_List.id-or-description-or-title-or-isShared-or-sharingCode-or-closureDate-or-ownersDTO-or-grantedUsersDTO_": {
+			"Pick_List.id-or-description-or-title-or-isShared-or-sharingCode-or-hasBookedGifts-or-closureDate-or-ownersDTO-or-grantedUsersDTO-or-isOwner_": {
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/UUID"
 					},
 					"sharingCode": {
 						"$ref": "#/components/schemas/UUID"
+					},
+					"hasBookedGifts": {
+						"type": "boolean"
 					},
 					"ownersDTO": {
 						"items": {
@@ -200,6 +209,9 @@
 						],
 						"nullable": true
 					},
+					"isOwner": {
+						"type": "boolean"
+					},
 					"isShared": {
 						"type": "boolean"
 					}
@@ -214,7 +226,7 @@
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
 			"ListDTO": {
-				"$ref": "#/components/schemas/Pick_List.id-or-description-or-title-or-isShared-or-sharingCode-or-closureDate-or-ownersDTO-or-grantedUsersDTO_"
+				"$ref": "#/components/schemas/Pick_List.id-or-description-or-title-or-isShared-or-sharingCode-or-hasBookedGifts-or-closureDate-or-ownersDTO-or-grantedUsersDTO-or-isOwner_"
 			},
 			"SelectKindList": {
 				"description": "List Selection Kind",
@@ -263,7 +275,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Pick_Gift.id-or-title-or-isBooked-or-bookedByDTO-or-isFavorite-or-isHidden-or-category-or-listId-or-price-or-linkURL-or-brand-or-size-or-color-or-comments_": {
+			"Pick_Gift.id-or-title-or-isBooked-or-bookedByDTO-or-isBookedByMe-or-isFavorite-or-isHidden-or-category-or-listId-or-price-or-linkURL-or-brand-or-size-or-color-or-comments_": {
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/UUID"
@@ -279,6 +291,9 @@
 							"$ref": "#/components/schemas/UserNameDTO"
 						},
 						"type": "array"
+					},
+					"isBookedByMe": {
+						"type": "boolean"
 					},
 					"isFavorite": {
 						"type": "boolean"
@@ -326,7 +341,7 @@
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
 			"GiftDTO": {
-				"$ref": "#/components/schemas/Pick_Gift.id-or-title-or-isBooked-or-bookedByDTO-or-isFavorite-or-isHidden-or-category-or-listId-or-price-or-linkURL-or-brand-or-size-or-color-or-comments_"
+				"$ref": "#/components/schemas/Pick_Gift.id-or-title-or-isBooked-or-bookedByDTO-or-isBookedByMe-or-isFavorite-or-isHidden-or-category-or-listId-or-price-or-linkURL-or-brand-or-size-or-color-or-comments_"
 			},
 			"UserDTO": {
 				"properties": {
@@ -385,6 +400,9 @@
 					"title": {
 						"type": "string"
 					},
+					"isBookedByMe": {
+						"type": "boolean"
+					},
 					"isFavorite": {
 						"type": "boolean"
 					},
@@ -436,6 +454,9 @@
 							"$ref": "#/components/schemas/UserNameDTO"
 						},
 						"type": "array"
+					},
+					"isBookedByMe": {
+						"type": "boolean"
 					},
 					"isFavorite": {
 						"type": "boolean"
@@ -916,8 +937,15 @@
 							}
 						}
 					},
-					"204": {
-						"description": "Success response, but user is in owners"
+					"401": {
+						"description": "User is part of the owners",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UnauthorizedErrorJSON"
+								}
+							}
+						}
 					},
 					"422": {
 						"description": "If body or request param type is violated",

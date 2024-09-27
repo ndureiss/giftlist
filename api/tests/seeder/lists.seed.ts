@@ -16,6 +16,7 @@ export const ListOwned: List = {
 	sharingCode: uuidv4(),
 	grantedUsers: [User1],
 	grantedUsersIds: [User1.id],
+	hasBookedGifts: false,
 	createdDate: getDateFromNow(-5),
 	updatedDate: getDateFromNow(-5),
 };
@@ -30,6 +31,7 @@ export const ListGranted: List = {
 	sharingCode: uuidv4(),
 	grantedUsers: [UserTest],
 	grantedUsersIds: [UserTest.id],
+	hasBookedGifts: false,
 	createdDate: getDateFromNow(-4),
 	updatedDate: getDateFromNow(-4),
 };
@@ -43,6 +45,7 @@ export const ListGrantedButNotShared: List = {
 	sharingCode: uuidv4(),
 	grantedUsers: [UserTest],
 	grantedUsersIds: [UserTest.id],
+	hasBookedGifts: false,
 	createdDate: getDateFromNow(-3),
 	updatedDate: getDateFromNow(-3),
 };
@@ -55,6 +58,7 @@ export const ListInvited: List = {
 	isShared: true,
 	sharingCode: uuidv4(),
 	grantedUsersIds: [],
+	hasBookedGifts: false,
 	createdDate: getDateFromNow(-2),
 	updatedDate: getDateFromNow(-2),
 };
@@ -67,6 +71,7 @@ export const ListUnauthorized: List = {
 	isShared: true,
 	sharingCode: uuidv4(),
 	grantedUsersIds: [],
+	hasBookedGifts: false,
 	createdDate: getDateFromNow(-1),
 	updatedDate: getDateFromNow(-1),
 };

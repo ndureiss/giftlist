@@ -102,6 +102,7 @@ class UserService {
 				lists: {
 					owners: true,
 					grantedUsers: true,
+					gifts: true,
 				},
 				friendLists: {
 					owners: true,
